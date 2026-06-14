@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Primation AI Demo</title>
+  <title>AI Assistant Demo</title>
 </head>
+
 <body>
 
-<h1>Primation AI Demo</h1>
+<h1>AI Assistant Demo</h1>
 
 <div id="userid"></div>
 
@@ -14,10 +15,24 @@ const userID = decodeURIComponent(
   window.location.pathname.substring(1)
 );
 
-document.getElementById('userid').innerHTML =
+document.getElementById("userid").innerHTML =
   "User ID: " + userID;
+</script>
 
-console.log(userID);
+<script type="text/javascript">
+  (function(d, t) {
+      var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+      v.onload = function() {
+        window.voiceflow.chat.load({
+          verify: { projectID: '6a22b4117aa8ede192da3866' },
+          url: 'https://general-runtime.voiceflow.com',
+          voice: {
+            url: "https://runtime-api.voiceflow.com"
+          }
+        });
+      }
+      v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
+  })(document, 'script');
 </script>
 
 </body>
