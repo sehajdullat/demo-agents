@@ -1,14 +1,10 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>AutomifyHub AI Demo</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<title>AI Receptionist Demo</title>
 
 <style>
 
@@ -16,284 +12,313 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:'Inter',sans-serif;
 }
 
 body{
-background:#050816;
+font-family:Inter,Arial,sans-serif;
+background:
+linear-gradient(
+90deg,
+rgba(255,255,255,0.04) 1px,
+transparent 1px
+),
+linear-gradient(
+rgba(255,255,255,0.04) 1px,
+transparent 1px
+),
+linear-gradient(
+135deg,
+#020617,
+#03133f,
+#071d5e
+);
+
+background-size:
+60px 60px,
+60px 60px,
+100% 100%;
+
 color:white;
 min-height:100vh;
 overflow-x:hidden;
 }
 
-body::before{
-content:'';
-position:fixed;
-inset:0;
-background:
-radial-gradient(circle at 85% 15%, rgba(59,130,246,.35), transparent 30%),
-radial-gradient(circle at 15% 80%, rgba(37,99,235,.25), transparent 35%);
-pointer-events:none;
-}
-
-.grid{
-position:fixed;
-inset:0;
-background-image:
-linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
-linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
-background-size:50px 50px;
-pointer-events:none;
-}
-
-.topbar{
-position:absolute;
-top:25px;
-right:25px;
-z-index:100;
-}
-
-.book-btn{
-background:linear-gradient(135deg,#2563eb,#60a5fa);
-border:none;
-padding:14px 24px;
-border-radius:999px;
-color:white;
-font-weight:700;
-cursor:pointer;
-font-size:15px;
-}
-
-.hero{
-min-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-padding:40px;
-}
-
-.container{
-max-width:1000px;
-text-align:center;
-}
-
-.badge{
-display:inline-block;
-padding:10px 18px;
-border-radius:999px;
-background:rgba(255,255,255,.05);
-border:1px solid rgba(255,255,255,.08);
-margin-bottom:30px;
-color:#93c5fd;
-font-size:14px;
-}
-
-h1{
-font-size:clamp(52px,8vw,92px);
-font-weight:800;
-line-height:1;
-margin-bottom:25px;
-}
-
-.highlight{
-background:linear-gradient(90deg,#60a5fa,#93c5fd);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-}
-
-.subheadline{
-font-size:clamp(20px,2vw,30px);
-color:#cbd5e1;
-margin-bottom:35px;
-}
-
-.card{
-max-width:850px;
-margin:auto;
-padding:30px;
-border-radius:24px;
-background:rgba(255,255,255,.05);
-border:1px solid rgba(255,255,255,.08);
-backdrop-filter:blur(12px);
-}
-
-.card p{
-font-size:22px;
-line-height:1.7;
-color:#e2e8f0;
-}
-
-.try-btn{
-margin-top:40px;
-padding:22px 54px;
-border:none;
-border-radius:20px;
-background:linear-gradient(135deg,#2563eb,#60a5fa);
-color:white;
-font-size:22px;
-font-weight:800;
-cursor:pointer;
-}
-
-.note{
-margin-top:20px;
-color:#94a3b8;
-font-size:15px;
-}
-
-.footer{
-margin-top:25px;
-font-size:14px;
-color:#64748b;
-}
-
 .logo{
 position:absolute;
-top:25px;
-left:25px;
+top:24px;
+left:24px;
 font-size:22px;
 font-weight:800;
+z-index:100;
 }
 
 .logo span{
 color:#60a5fa;
 }
 
-@media(max-width:768px){
+.topbar{
+position:absolute;
+top:24px;
+right:24px;
+z-index:100;
+}
+
+.book-btn{
+display:inline-block;
+padding:16px 28px;
+border-radius:18px;
+text-decoration:none;
+font-weight:700;
+font-size:18px;
+color:white;
+background:linear-gradient(
+135deg,
+#2563eb,
+#60a5fa
+);
+}
+
+.hero{
+max-width:1100px;
+margin:auto;
+padding:
+120px 20px
+120px;
+text-align:center;
+}
+
+.badge{
+display:inline-block;
+padding:10px 22px;
+border-radius:999px;
+border:1px solid rgba(255,255,255,0.1);
+background:rgba(255,255,255,0.04);
+color:#93c5fd;
+font-size:18px;
+margin-bottom:40px;
+backdrop-filter:blur(10px);
+}
+
+h1{
+font-size:110px;
+font-weight:800;
+line-height:1;
+margin-bottom:20px;
+}
+
+.name{
+color:#60a5fa;
+}
+
+.subheadline{
+font-size:28px;
+color:#dbeafe;
+margin-bottom:40px;
+}
+
+.card{
+max-width:760px;
+margin:auto;
+padding:42px;
+border-radius:28px;
+background:
+linear-gradient(
+135deg,
+rgba(255,255,255,0.08),
+rgba(255,255,255,0.03)
+);
+
+backdrop-filter:blur(14px);
+border:1px solid rgba(255,255,255,0.08);
+}
 
 .card p{
-font-size:18px;
+font-size:24px;
+line-height:1.8;
+color:#e5e7eb;
 }
 
 .try-btn{
-width:100%;
-max-width:320px;
+display:inline-block;
+margin-top:40px;
+padding:18px 42px;
+border-radius:18px;
+background:linear-gradient(
+135deg,
+#2563eb,
+#60a5fa
+);
+color:white;
+font-size:20px;
+font-weight:800;
+text-decoration:none;
+}
+
+.note{
+margin-top:18px;
+font-size:14px;
+opacity:.7;
+}
+
+@media(max-width:768px){
+
+.logo{
+top:18px;
+left:16px;
+font-size:18px;
+}
+
+.topbar{
+top:16px;
+right:16px;
+}
+
+.book-btn{
+padding:12px 18px;
+font-size:15px;
+}
+
+.hero{
+padding-top:95px;
+}
+
+.badge{
+font-size:13px;
+padding:8px 14px;
+margin-bottom:25px;
+max-width:230px;
+}
+
+h1{
+font-size:72px;
+}
+
+.subheadline{
+font-size:18px;
+line-height:1.4;
+margin-bottom:25px;
+}
+
+.card{
+padding:24px;
+border-radius:22px;
+}
+
+.card p{
+font-size:16px;
+line-height:1.8;
+}
+
+.try-btn{
+padding:16px 28px;
+font-size:18px;
+margin-bottom:90px;
 }
 
 }
 
 </style>
-
 </head>
-
 <body>
 
-<div class="grid"></div>
-
 <div class="logo">
-Automify<span>Hub</span>
+Sehaj <span>Dullat</span>
 </div>
 
 <div class="topbar">
-<a href="https://calendly.com/sehajdullat0001/30min" target="_blank">
-<button class="book-btn">
+<a
+class="book-btn"
+href="https://calendly.com/sehajdullat0001/30min"
+target="_blank"
+>
 Book a Call
-</button>
 </a>
 </div>
 
-<section class="hero">
-
-<div class="container">
+<div class="hero">
 
 <div class="badge">
 Personalized AI Receptionist Demo
 </div>
 
-<h1 id="headline">
-Hey <span class="highlight">There</span>,
+<h1>
+Hey <span class="name" id="name">there</span>,
 </h1>
 
-<p class="subheadline" id="subheadline">
+<div class="subheadline" id="headline">
 I built an AI receptionist for your business.
-</p>
+</div>
 
 <div class="card">
-
-<p id="mainText">
-This AI assistant can answer visitor questions, qualify leads,
-capture inquiries, and help book appointments automatically
+<p>
+This AI assistant can answer visitor questions,
+qualify leads, capture inquiries,
+and help book appointments automatically
 while you're focused on running your business.
 </p>
-
 </div>
 
-<button class="try-btn" id="openChat">
+<a href="#"
+class="try-btn"
+onclick="window.voiceflow.chat.open(); return false;">
 Try It Out →
-</button>
+</a>
 
-<p class="note">
-Chat with the AI assistant using the button in the bottom-right corner.
-</p>
-
-<div class="footer" id="footerText">
-Built automatically from your website.
+<div class="note">
+A live AI assistant is available in the bottom-right corner.
 </div>
 
 </div>
-
-</section>
 
 <script>
 
-const params = new URLSearchParams(window.location.search);
+const params =
+new URLSearchParams(window.location.search);
 
 const email =
-params.get("email") || "anonymous-user";
+params.get('email') || '';
 
-const firstName =
-params.get("name") || "There";
+const name =
+params.get('name') || 'there';
 
 const company =
-params.get("company") || "";
+params.get('company') || 'your business';
 
-document.getElementById("headline").innerHTML =
-`Hey <span class="highlight">${firstName}</span>,`;
+document.getElementById('name').textContent =
+name;
 
-if(company){
-
-document.getElementById("subheadline").innerHTML =
+document.getElementById('headline').textContent =
 `I built an AI receptionist for ${company}.`;
-
-document.getElementById("footerText").innerHTML =
-`Built specifically for ${company}.`;
-
-}
-
-document.getElementById("openChat")
-.addEventListener("click", function(){
-
-if(window.voiceflow && window.voiceflow.chat){
-
-window.voiceflow.chat.open();
-
-}
-
-});
 
 </script>
 
 <script type="text/javascript">
 
-(function(d, t) {
+(function(d,t){
 
-var v = d.createElement(t),
-s = d.getElementsByTagName(t)[0];
+var v=d.createElement(t),
+s=d.getElementsByTagName(t)[0];
 
-v.onload = function() {
+v.onload=function(){
+
+const params =
+new URLSearchParams(window.location.search);
+
+const email =
+params.get('email') || 'anonymous';
 
 window.voiceflow.chat.load({
 
-verify: {
-projectID: '6a22b4117aa8ede192da3866'
+verify:{
+projectID:'6a22b4117aa8ede192da3866'
 },
 
-url: 'https://general-runtime.voiceflow.com',
+url:'https://general-runtime.voiceflow.com',
 
-userID: email,
+userID:email,
 
-voice: {
-url: "https://runtime-api.voiceflow.com"
+voice:{
+url:'https://runtime-api.voiceflow.com'
 }
 
 });
@@ -303,11 +328,11 @@ url: "https://runtime-api.voiceflow.com"
 v.src =
 "https://cdn.voiceflow.com/widget-next/bundle.mjs";
 
-v.type = "text/javascript";
+v.type="text/javascript";
 
-s.parentNode.insertBefore(v, s);
+s.parentNode.insertBefore(v,s);
 
-})(document, 'script');
+})(document,'script');
 
 </script>
 
