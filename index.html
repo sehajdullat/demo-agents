@@ -4,6 +4,21 @@
   <title>Primation AI Demo</title>
 </head>
 <body>
-  <h1>Primation AI Demo</h1>
+
+<h1>Primation AI Demo</h1>
+
+<div id="userid"></div>
+
+<script>
+const userID = decodeURIComponent(
+  window.location.pathname.substring(1)
+);
+
+document.getElementById('userid').innerHTML =
+  "User ID: " + userID;
+
+console.log(userID);
+</script>
+
 </body>
 </html>
