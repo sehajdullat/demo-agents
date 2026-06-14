@@ -1,47 +1,314 @@
 <!DOCTYPE html>
-<html>
+
+<html lang="en">
+
 <head>
-  <title>Your Custom AI Assistant</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AutomifyHub AI Demo</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Inter',sans-serif;
+}
+
+body{
+background:#050816;
+color:white;
+min-height:100vh;
+overflow-x:hidden;
+}
+
+body::before{
+content:'';
+position:fixed;
+inset:0;
+background:
+radial-gradient(circle at 85% 15%, rgba(59,130,246,.35), transparent 30%),
+radial-gradient(circle at 15% 80%, rgba(37,99,235,.25), transparent 35%);
+pointer-events:none;
+}
+
+.grid{
+position:fixed;
+inset:0;
+background-image:
+linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+background-size:50px 50px;
+pointer-events:none;
+}
+
+.topbar{
+position:absolute;
+top:25px;
+right:25px;
+z-index:100;
+}
+
+.book-btn{
+background:linear-gradient(135deg,#2563eb,#60a5fa);
+border:none;
+padding:14px 24px;
+border-radius:999px;
+color:white;
+font-weight:700;
+cursor:pointer;
+font-size:15px;
+}
+
+.hero{
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:40px;
+}
+
+.container{
+max-width:1000px;
+text-align:center;
+}
+
+.badge{
+display:inline-block;
+padding:10px 18px;
+border-radius:999px;
+background:rgba(255,255,255,.05);
+border:1px solid rgba(255,255,255,.08);
+margin-bottom:30px;
+color:#93c5fd;
+font-size:14px;
+}
+
+h1{
+font-size:clamp(52px,8vw,92px);
+font-weight:800;
+line-height:1;
+margin-bottom:25px;
+}
+
+.highlight{
+background:linear-gradient(90deg,#60a5fa,#93c5fd);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.subheadline{
+font-size:clamp(20px,2vw,30px);
+color:#cbd5e1;
+margin-bottom:35px;
+}
+
+.card{
+max-width:850px;
+margin:auto;
+padding:30px;
+border-radius:24px;
+background:rgba(255,255,255,.05);
+border:1px solid rgba(255,255,255,.08);
+backdrop-filter:blur(12px);
+}
+
+.card p{
+font-size:22px;
+line-height:1.7;
+color:#e2e8f0;
+}
+
+.try-btn{
+margin-top:40px;
+padding:22px 54px;
+border:none;
+border-radius:20px;
+background:linear-gradient(135deg,#2563eb,#60a5fa);
+color:white;
+font-size:22px;
+font-weight:800;
+cursor:pointer;
+}
+
+.note{
+margin-top:20px;
+color:#94a3b8;
+font-size:15px;
+}
+
+.footer{
+margin-top:25px;
+font-size:14px;
+color:#64748b;
+}
+
+.logo{
+position:absolute;
+top:25px;
+left:25px;
+font-size:22px;
+font-weight:800;
+}
+
+.logo span{
+color:#60a5fa;
+}
+
+@media(max-width:768px){
+
+.card p{
+font-size:18px;
+}
+
+.try-btn{
+width:100%;
+max-width:320px;
+}
+
+}
+
+</style>
+
 </head>
 
 <body>
 
-<h1>Your Custom AI Assistant</h1>
+<div class="grid"></div>
 
-<div id="userid"></div>
+<div class="logo">
+Automify<span>Hub</span>
+</div>
+
+<div class="topbar">
+<a href="https://calendly.com/sehajdullat0001/30min" target="_blank">
+<button class="book-btn">
+Book a Call
+</button>
+</a>
+</div>
+
+<section class="hero">
+
+<div class="container">
+
+<div class="badge">
+Personalized AI Receptionist Demo
+</div>
+
+<h1 id="headline">
+Hey <span class="highlight">There</span>,
+</h1>
+
+<p class="subheadline" id="subheadline">
+I built an AI receptionist for your business.
+</p>
+
+<div class="card">
+
+<p id="mainText">
+This AI assistant can answer visitor questions, qualify leads,
+capture inquiries, and help book appointments automatically
+while you're focused on running your business.
+</p>
+
+</div>
+
+<button class="try-btn" id="openChat">
+Try It Out →
+</button>
+
+<p class="note">
+Chat with the AI assistant using the button in the bottom-right corner.
+</p>
+
+<div class="footer" id="footerText">
+Built automatically from your website.
+</div>
+
+</div>
+
+</section>
 
 <script>
-const userID = decodeURIComponent(
-  window.location.pathname.substring(1)
-);
 
-document.getElementById("userid").innerHTML =
-  "User ID: " + userID;
+const params = new URLSearchParams(window.location.search);
+
+const email =
+params.get("email") || "anonymous-user";
+
+const firstName =
+params.get("name") || "There";
+
+const company =
+params.get("company") || "";
+
+document.getElementById("headline").innerHTML =
+`Hey <span class="highlight">${firstName}</span>,`;
+
+if(company){
+
+document.getElementById("subheadline").innerHTML =
+`I built an AI receptionist for ${company}.`;
+
+document.getElementById("footerText").innerHTML =
+`Built specifically for ${company}.`;
+
+}
+
+document.getElementById("openChat")
+.addEventListener("click", function(){
+
+if(window.voiceflow && window.voiceflow.chat){
+
+window.voiceflow.chat.open();
+
+}
+
+});
+
 </script>
 
 <script type="text/javascript">
-  (function(d, t) {
-      var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
-      v.onload = function() {
-const userID = decodeURIComponent(
-  window.location.pathname.substring(1)
-);
+
+(function(d, t) {
+
+var v = d.createElement(t),
+s = d.getElementsByTagName(t)[0];
+
+v.onload = function() {
 
 window.voiceflow.chat.load({
-  verify: {
-    projectID: '6a22b4117aa8ede192da3866'
-  },
-  url: 'https://general-runtime.voiceflow.com',
 
-  userID: userID,
+verify: {
+projectID: '6a22b4117aa8ede192da3866'
+},
 
-  voice: {
-    url: "https://runtime-api.voiceflow.com"
-  }
+url: 'https://general-runtime.voiceflow.com',
+
+userID: email,
+
+voice: {
+url: "https://runtime-api.voiceflow.com"
+}
+
 });
-      }
-      v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
-  })(document, 'script');
+
+};
+
+v.src =
+"https://cdn.voiceflow.com/widget-next/bundle.mjs";
+
+v.type = "text/javascript";
+
+s.parentNode.insertBefore(v, s);
+
+})(document, 'script');
+
 </script>
 
 </body>
